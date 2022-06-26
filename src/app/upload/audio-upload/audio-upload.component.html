@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <h3>Add Audio File</h3>
+  <input type="file" (change)="handleFileInput($event.target)" accept="audio/*"/>
+  <br><br>
+  <div *ngIf="file">
+    <div>Name: {{file.name}}</div>
+    <div>Type: {{file.type}}</div>
+    <div>Size: {{file.size}}</div>
+    <div>Duration: {{duration}}</div>
+  </div>
+
+  <ng-template [ngIf]="audio">
+    <audio controls #audioElement>
+      <source [src]="audio | safeUrl">
+      Your browser does not support the audio element.
+
+    </audio>
+  </ng-template>
+</div>
