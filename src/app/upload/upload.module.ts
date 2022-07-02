@@ -14,7 +14,7 @@ import {SafeUrlPipe} from "../safe-url.pipe";
     AudioUploadComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class UploadModule { }

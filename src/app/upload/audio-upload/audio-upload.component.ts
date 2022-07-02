@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'audio-upload',
@@ -10,6 +10,8 @@ export class AudioUploadComponent {
   file: File | undefined;
   duration: number = 0;
   audio: any;
+
+  @Output("File") newFileEvent = new EventEmitter<File>;
 
 
   @ViewChild('audioElement') audioElement: ElementRef | undefined;
@@ -31,6 +33,7 @@ export class AudioUploadComponent {
         this.duration = e.currentTarget.duration;
       }
     }
+    this.newFileEvent.emit(this.file);
 
   }
 }
