@@ -10,9 +10,6 @@ import * as Tone from 'tone';
 })
 export class PlayMidiComponent implements OnInit {
 
-  constructor() {
-  }
-
   ngOnInit(): void {
 
   }

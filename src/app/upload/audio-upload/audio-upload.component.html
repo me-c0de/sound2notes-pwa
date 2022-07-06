@@ -1,19 +1,44 @@
 <div class="wrapper">
   <h3>Add Audio File</h3>
-  <input type="file" (change)="handleFileInput($event.target)" accept="audio/*"/>
+  <ngx-file-drop dropZoneLabel="Drop files here"
+                 browseBtnClassName="test"
+                 (onFileDrop)="dropped($event)"
+                 accept="audio/*"
+                 dropZoneClassName=""
+
+  >
+
+    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+      <div class="maxSize" (click)="openFileSelector()">
+        Drop files here or Click to Select Files
+      </div>
+    </ng-template>
+  </ngx-file-drop>
+
+  <!--<input type="file" (change)="handleFileInput($event.target)" accept="audio/*"/>-->
   <br><br>
-  <div *ngIf="file">
-    <div>Name: {{file.name}}</div>
-    <div>Type: {{file.type}}</div>
-    <div>Size: {{file.size}}</div>
-    <div>Duration: {{duration}}</div>
-  </div>
 
-  <ng-template [ngIf]="audio">
-    <audio controls #audioElement>
-      <source [src]="audio | safeUrl">
-      Your browser does not support the audio element.
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Count: {{files.length}}</th>
+    </tr>
+    </thead>
+    <tbody class="upload-name-style">
+    <tr *ngFor="let file of files; let i = index">
+      <td><strong>{{ file.entry.relativePath }}</strong></td>
+      <td>
+        <audio controls>
+          <source [src]=" getAudio(file) | safeUrl">
+          Your browser does not support the audio element.
 
-    </audio>
-  </ng-template>
+        </audio>
+      </td>
+      <td>
+        <button (click)="Upload(file)"> Upload</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
